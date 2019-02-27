@@ -5,6 +5,7 @@ function setup() {
 
   noStroke()
 
+
   //
   const gui = new dat.GUI()
   gui.add(controls, 'velocityScale', -1, 1)
@@ -111,7 +112,7 @@ function draw() {
   }
 }
 
-const controles = {
+const controls = {
   velocityScale: 0.1,
   gravity: 0.0,
   lifetime: 0
@@ -145,8 +146,10 @@ function updateParticles() {
   for (var i = 0; i < particles.length; i++) {
     const p = particles[i]
 
-    p.x += (p.xVel);
-    p.y += (p.yVel);
+    p.x += (p.xVel * controls.velocityScale);
+    p.y += (p.yVel * controls.velocityScale);
+
+    p.yvel += controls.gravity;
 
     if(p.x >= windowHeight || p.x <= 0){
       p.xVel *= -1
@@ -155,7 +158,11 @@ function updateParticles() {
     if(p.y >= windowHeight || p.y <= 0){
       p.yVel *= -1
     }
-    p.life += 0.001
+    p.life += (0.001 * controls.lifetime)
+
+    if (p.life > 0) {
+      outputParticles.pop(p)
+    }
 
     fill(p.hue, 255, 255, p.life*50)
     ellipse(p.x, p.y, p.size, p.size)
