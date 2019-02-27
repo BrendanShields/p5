@@ -13,6 +13,7 @@ function setup() {
   // Change the color we use to specify the colors;
   colorMode(HSB, 255);
 
+
   // stroke(random(255));
   // fill(0,100,100);
   // strokeWeight(2);
@@ -108,6 +109,12 @@ function draw() {
   if (mouseIsPressed || keyIsDown(SHIFT)) {
     ellipse(x, y, size, size)
   }
+}
+
+const controles = {
+  velocityScale: 0.1,
+  gravity: 0.0,
+  lifetime: 0
 }
 
 let particles = [];
