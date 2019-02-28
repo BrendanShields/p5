@@ -13,6 +13,7 @@ function setup() {
   gui.add(controls, 'lifetime', -1, 1)
   // Change the color we use to specify the colors;
   colorMode(HSB, 255);
+  gui.closed = true;
 
 
   // stroke(random(255));
@@ -140,6 +141,9 @@ function draw() {
 updateParticles()
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight, [noRedraw])
+}
 function updateParticles() {
   let outputParticles = [];
 
